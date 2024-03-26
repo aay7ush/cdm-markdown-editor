@@ -10,7 +10,8 @@ const Editor = () => {
 		const value = event.target.value
 
 		setMarkdown(value)
-		setWords(value.match(/(\w+)/g).length)
+		const wordCount = (value.match(/(\w+)/g) ?? []).length
+		setWords(wordCount)
 		setChars(value.length)
 	}
 
@@ -24,13 +25,17 @@ const Editor = () => {
 	}
 
 	return (
-		<section className="p-5 space-y-4">
+		<section className="editor">
 			<div className="flex justify-between items-center">
 				<h4 className="text-3xl font-bold">Editor</h4>
 
 				<div className="flex gap-x-2.5 text-lg">
-					<p className="font-bold">{words}</p> Words
-					<p className="font-bold">{chars}</p> Characters
+					<p>
+						<span className="font-bold">{words}</span> Words
+					</p>
+					<p>
+						<span className="font-bold">{chars}</span> Characters
+					</p>
 					<button onClick={downloadFile}>
 						<img src="/download.svg" alt="download icon" />
 					</button>
